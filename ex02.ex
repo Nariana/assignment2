@@ -30,10 +30,12 @@ defmodule Ex02 do
   # numbers, and second should be the difference                         #
   ########################################################################
 
-  list2a = your_anonymous_function(1, 2)
+  list2a = fn a, b -> [a+b, a-b] end
 
   assert list2a.(1, 2)    == [ 3, -1 ]
   assert list2a.(-1, 100) == [ 99, -101 ]
+  assert list2a.(-1, -1) == [-2, 0]
+  assert list2a.(-0.1, 0.1) == [0, -0.2]
 
   ##################
   # 2.2:  5 points #
@@ -41,10 +43,12 @@ defmodule Ex02 do
   # Do the same using the & syntax #
   ##################################
 
-  list2b = your_anonymous_function(1, 2)
+  list2b = &([&1 + &2, &1 - &2])
 
   assert list2b.(1, 2)    == [ 3, -1 ]
   assert list2b.(-1, 100) == [ 99, -101 ]
+  assert list2a.(-1, -1) == [-2, 0]
+  assert list2a.(-0.1, 0.1) == [0, -0.2]
 
   ##################
   # 2.3:  5 points #
@@ -53,11 +57,27 @@ defmodule Ex02 do
   # if the first two elements of a list are equal                #
   ################################################################
 
-  first2equal = your_anonymous_function([])
+  # This was my first solution to the problem. 
+  # It's more code, but it is a solution assuming a non-empty, 2+ element list.
+  # first2equal = fn [h1|[h2|_rest]] -> h1 == h2 end
 
+  # Note: I decided to handle anything aside from the truthy case with an _, instead of writing 
+  # specific cases for multiple things, such as an empty list, a list with 1 element, a non-list, and so on.
 
-  assert  first2equal.([4, 4, 5, 6, 7])
+  first2equal = fn
+                [h,h|_] -> true
+                _ -> false 
+  end
+
+  assert !first2equal.([])
+  assert !first2equal.([1])
+  assert first2equal.([4, 4, 5, 6, 7])
   assert !first2equal.([4, 5, 6, 7, 8])
+  assert first2equal.([-4, -4, 6, 7, 8])
+  assert !first2equal.([-4, 4, 6, 7, 8])
+  assert !first2equal.(["a", "A", "b", "c"])
+  assert first2equal.(["a", "a", "b", "c"])
+  assert first2equal.(["_" , "_" , "b", 1])
 
 end
 

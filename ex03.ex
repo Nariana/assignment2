@@ -55,8 +55,21 @@ defmodule Ex03 do
 
   """
 
-  def odd_even . . . "your code"
+  def odd_even([]), do: 0
 
+  ########
+  NOT FINISHED
+  def odd_even([h|t])
+    cond do
+      h % 2 == 0 -> 
+        h = [:even]
+        create_list([t])
+      h % 2 == 1 -> 
+        h = [:odd]
+        create_list([t])
+    end
+  end
+  ########
 
   ##############################################################################
   # 3.2:  5 points #
@@ -77,7 +90,13 @@ defmodule Ex03 do
 
   """
 
-  def list_contains . .. "your code"
+  def list_contains([], _), do: false
+  def list_contains([h|t], value) do
+    case value do
+      h -> true
+      _ -> list_contains([t], value)
+    end
+  end
 
   ##############################################################################
   # 3.3:  5 points #
@@ -101,8 +120,11 @@ defmodule Ex03 do
 
   """
 
-  def list_equal . . . "your code"
+  # Note: I decided to handle anything aside from the truthy case with an _, instead of writing 
+  # specific cases for multiple things, such as an empty list, a list with 1 element, a non-list, and so on.
 
+  def list_equal([h|t], [h|t]), do: true
+  def list_equal(_, _), do: false
 
 
   ##############################################################################
@@ -150,6 +172,7 @@ defmodule Ex03 do
   """
 
   def won . . . "your code"
+  # there should be 8 function heads
 
 
   ###########################
