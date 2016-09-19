@@ -66,14 +66,21 @@ defmodule Ex04 do
 
   """
 
+
+  #####
+  # Developer's note: I'm sure you've noticed that I choose to handle empty lists by just 
+  # returning empty.
+  #####
+
   def min([]), do: []
   def min([h|t]) do
-    reduce([h|t], fn a, b
-      -> cond do
-        a < b -> a
-        b < a -> b
+    reduce([h|t], fn 
+      a, b -> 
+        cond do
+          a < b -> a
+          b < a -> b
+        end
       end
-    end
     )
   end
 
@@ -97,8 +104,21 @@ defmodule Ex04 do
   return value will be the thing you have to manipulate.
   """
 
-  def even_odd([]), do: 0
 
+  def even_odd([h|t]) do
+    {even, odd} = 
+      reduce([h|t], {[],[]}, fn 
+        i, {even, odd} -> 
+          cond do
+            Integer.is_even(i) -> {[i|even], odd}
+            Integer.is_odd(i) -> {even, [i|odd]}
+          end
+        end
+      )
+    reverse_lists(even, odd)
+  end    
+
+  def reverse_lists(even, odd), do: {reverse(even), reverse(odd)}
 
 
 
