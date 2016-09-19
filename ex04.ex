@@ -31,12 +31,6 @@ defmodule Ex04 do
   ##############################################################################
   # 4.1:  5 points #
   ##################
-  #####
-  # Developer's note: I'm assuming that no assert calls are required for the named functions
-  # since ExUnit.Case wasn't used and there were no provided assert calls.
-  #####
-
-
   @doc """
   Use `reduce` to reverse a list. (there's a hint above)
 
@@ -44,7 +38,19 @@ defmodule Ex04 do
       [ 1, 2, 3, 4, 5 ]
 
   """
-  def reverse([h|t]), do: 0
+
+
+  #####
+  # Developer's note: I'm assuming that no assert calls are required for the named functions
+  # since ExUnit.Case wasn't used and there were no provided assert calls.
+  #####
+
+  def reverse([]), do: []
+  def reverse([h|t]) do
+    reduce([h|t], [], &[&1 | &2])
+  end
+
+
 
   ##############################################################################
   # 4.2:  5 points #
@@ -60,7 +66,18 @@ defmodule Ex04 do
 
   """
 
-  def min . . . "your code"
+  def min([]), do: []
+  def min([h|t]) do
+    reduce([h|t], fn a, b
+      -> cond do
+        a < b -> a
+        b < a -> b
+      end
+    end
+    )
+  end
+
+
 
   ##############################################################################
   # 4.3: 10 points #
@@ -80,7 +97,7 @@ defmodule Ex04 do
   return value will be the thing you have to manipulate.
   """
 
-  def even_odd . . . "your code"
+  def even_odd([]), do: 0
 
 
 
