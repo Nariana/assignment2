@@ -57,12 +57,11 @@ defmodule Ex02 do
   # if the first two elements of a list are equal                #
   ################################################################
 
-  # This was my first solution to the problem. 
-  # It's more code, but it is a solution assuming a non-empty, 2+ element list.
-  # first2equal = fn [h1|[h2|_rest]] -> h1 == h2 end
-
-  # Note: I decided to handle anything aside from the truthy case with an _, instead of writing 
-  # specific cases for multiple things, such as an empty list, a list with 1 element, a non-list, and so on.
+  ###### 
+  # Developer's note: I decided to handle anything aside from the truthy case with an _, instead of 
+  # writing specific cases for multiple things, such as an empty list, a list with 1 element, 
+  # a non-list, and so on.
+  ######
 
   first2equal = fn
                 [h,h|_] -> true
